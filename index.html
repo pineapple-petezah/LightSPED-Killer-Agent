@@ -3,29 +3,184 @@
 <head>
     <title>LightSPED Killer Agent</title>
     <link rel="icon" type="image/png" href="lightspeed.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin: 0;
+            background-color: #1e1f22;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .logo {
+            height: 50px;
+        }
+        button {
+            background: transparent;
+            color: #9dbae9;
+            font-size: 20px;
+            font-weight: bold;
+            border: 1px solid #047db7;
+            border-radius: 20px;
+            width: 150px;
+            height: 40px;
+            padding: 7px 10px;
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
+            outline: none;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #38393b;
+        }
+        iframe {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            border: none;
+            opacity: 0;
+        }
+    </style>
     <script>
         function hanger() {
             let extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
             let extWin = window.open(extURL);
-
             setTimeout(function() {
-                let killURL = "https://" + "e".repeat(2000000); // generates a really long URL that hangs the extension page
+                let killURL = "https://" + "e".repeat(2000000);
                 extWin.location.href = killURL;
-                let iframe = document.createElement("iframe"); // iframe so that the extension wont restore itself when the switch is flipped
+                let iframe = document.createElement("iframe");
                 iframe.src = extURL;
-                iframe.style.width = "10px";
-                iframe.style.height = "10px";
-                iframe.style.border = "none";
                 document.body.appendChild(iframe);
                 setTimeout(function() {
                     extWin.close();
+                    createPopup();
                 }, 500);
             }, 10);
+        }
+		function createPopup() {
+            const overlay = document.createElement("div");
+            overlay.style.position = "fixed";
+            overlay.style.top = "0";
+            overlay.style.left = "0";
+            overlay.style.width = "100vw";
+            overlay.style.height = "100vh";
+            overlay.style.background = "rgba(0, 0, 0, 0.6)";
+            overlay.style.zIndex = "999";
+            overlay.style.display = "flex";
+            overlay.style.justifyContent = "center";
+            overlay.style.alignItems = "center";
+
+            const popup = document.createElement("div");
+            popup.style.background = "#292a2d";
+            popup.style.color = "white";
+            popup.style.width = "500px";
+            popup.style.borderRadius = "10px";
+            popup.style.overflow = "hidden";
+            popup.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.3)";
+            popup.style.transition = "transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)";
+
+            const header = document.createElement("div");
+            header.style.display = "flex";
+            header.style.alignItems = "center";
+            header.style.justifyContent = "space-between";
+            header.style.background = "#1e1f22";
+            header.style.padding = "10px";
+            header.style.borderBottom = "1px solid #444";
+
+            const icon = document.createElement("img");
+            icon.src = "lightspeed.png";
+            icon.style.width = "32px";
+            icon.style.height = "32px";
+            icon.style.marginLeft = "10px";
+            icon.style.marginRight = "8px";
+            icon.style.marginBottom = "5px";
+            icon.style.marginTop = "5px";
+            icon.style.userSelect = "none";
+
+            const title = document.createElement("span");
+            title.textContent = "Lightspeed Filter Agent";
+            title.style.userSelect = "none";
+
+            const leftSection = document.createElement("div");
+            leftSection.style.display = "flex";
+            leftSection.style.alignItems = "center";
+            leftSection.appendChild(icon);
+            leftSection.appendChild(title);
+
+            const x = document.createElement("span");
+            x.textContent = "×";
+            x.style.background = "transparent";
+            x.style.color = "#9aa0a6";
+            x.style.fontSize = "24px";
+            x.style.marginRight = "-4px";
+            x.style.marginTop = "-22px";
+            x.style.cursor = "pointer";
+            x.style.userSelect = "none";
+            x.style.borderRadius = "50%";
+            x.style.padding = "0";
+            x.style.width = "32px";
+            x.style.height = "32px";
+            x.style.lineHeight = "32px";
+            x.style.textAlign = "center";
+            x.style.display = "inline-block";
+
+            x.onmouseover = () => {
+                x.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+            };
+
+            x.onmouseout = () => {
+                x.style.backgroundColor = "transparent";
+            };
+
+            x.onclick = () => document.body.removeChild(overlay);
+
+            header.appendChild(leftSection);
+            header.appendChild(x);
+
+            const instructions = document.createElement("p");
+            instructions.innerHTML = "Lightspeed has been hanged. To kill it, go to the following url and flip the allow access to file URLs switch. <br><br> chrome://extensions/?id=adkcpkpghahmbopkjchobieckeoaoeem";
+            instructions.style.padding = "15px";
+            instructions.style.textAlign = "center";
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.style.display = "flex";
+            buttonContainer.style.justifyContent = "center";
+            buttonContainer.style.padding = "10px";
+
+            overlay.onclick = (event) => {
+                if (event.target === overlay) {
+                    popup.style.transform = "scale(1.03)";
+                    setTimeout(() => {
+                        popup.style.transform = "scale(1)";
+                    }, 200);
+                }
+            };
+
+            popup.appendChild(header);
+            popup.appendChild(instructions);
+            popup.appendChild(buttonContainer);
+
+            overlay.appendChild(popup);
+            document.body.appendChild(overlay);
         }
     </script>
 </head>
 <body>
-<h2>LightSPED Killer Agent</h2>
-<button onclick="hanger()">Hang extension</button>
+    <div class="title-container">
+        <img src="lightspeed.png" alt="lightsped" class="logo">
+        <h2>LightSPED Killer Agent</h2>
+    </div>
+    <button onclick="hanger()">Launch</button>
 </body>
 </html>
