@@ -74,19 +74,19 @@
             fetch(extURL)
                 .then(response => {
                     if (!response.ok) {
-			    const launchButton = document.querySelector("button");
-                	    launchButton.remove();
-            		    const message = document.createElement("p");
-            	            message.innerText = "You don't have Lightspeed Filter Agent installed.";
-                            document.body.appendChild(message);
-                    }
-                })
-                .catch(() => {
 			const launchButton = document.querySelector("button");
                 	launchButton.remove();
             		const message = document.createElement("p");
             	        message.innerText = "You don't have Lightspeed Filter Agent installed.";
                         document.body.appendChild(message);
+                    }
+                })
+                .catch(() => {
+		    const launchButton = document.querySelector("button");
+                    launchButton.remove();
+            	    const message = document.createElement("p");
+            	    message.innerText = "You don't have Lightspeed Filter Agent installed.";
+                    document.body.appendChild(message);
                 });
         }
 
@@ -264,7 +264,7 @@
 
 	    function checkKilled() {
         	const iframe = document.createElement("iframe");
-        	iframe.src = "https://orteil.dashnet.org/cookieclicker/"; // attempts loading cookie clicker to see if lighspeed died
+        	iframe.src = "https://example.com/"; // attempts loading a page to see if lighspeed died
         	iframe.style.width = "1px";
         	iframe.style.height = "1px";
         	iframe.style.position = "absolute";
