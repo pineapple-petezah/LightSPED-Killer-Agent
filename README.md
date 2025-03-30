@@ -1,5 +1,5 @@
 ## LightSPED Killer Agent
-LightSPED is a tool made by [Blobby-Boi](https://github.com/Blobby-Boi) that allows ChromeOS users to easily disable the "Lightspeed Filter Agent" extension. This utilizes a modified version of the ExtFlood3r exploit, and it will persist until you restart your computer or flip the switch again.
+LightSPED is a tool made by [Blobby-Boi](https://github.com/Blobby-Boi) that allows ChromeOS users to easily disable the "Lightspeed Filter Agent" extension. This will persist until you restart your computer or flip the switch again.
 
 ### How to use
 - Step 1. Go to [this link](https://lightsped-killer-agent.github.io) or open the following data URI:
