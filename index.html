@@ -207,35 +207,7 @@
             leftSection.appendChild(icon);
             leftSection.appendChild(title);
 
-            const x = document.createElement("span");
-            x.textContent = "×";
-            x.style.background = "transparent";
-            x.style.color = "#9aa0a6";
-            x.style.fontSize = "24px";
-            x.style.marginRight = "-4px";
-            x.style.marginTop = "-22px";
-            x.style.cursor = "pointer";
-            x.style.userSelect = "none";
-            x.style.borderRadius = "50%";
-            x.style.padding = "0";
-            x.style.width = "32px";
-            x.style.height = "32px";
-            x.style.lineHeight = "32px";
-            x.style.textAlign = "center";
-            x.style.display = "inline-block";
-
-            x.onmouseover = () => {
-                x.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
-            };
-
-            x.onmouseout = () => {
-                x.style.backgroundColor = "transparent";
-            };
-
-            x.onclick = () => document.body.removeChild(overlay);
-
             header.appendChild(leftSection);
-            header.appendChild(x);
 
             const instructions = document.createElement("p");
             instructions.innerHTML = "Lightspeed has been hanged. To kill it, open the following URL in a new tab (don't close this one) and flip the switch titled \"Allow access to file URLs\". <br><br> chrome://extensions/?id=adkcpkpghahmbopkjchobieckeoaoeem";
