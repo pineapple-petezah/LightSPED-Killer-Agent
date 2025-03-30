@@ -261,6 +261,24 @@
 
             overlay.appendChild(popup);
             document.body.appendChild(overlay);
+
+	    function checkKilled() {
+        	const iframe = document.createElement("iframe");
+        	iframe.src = "https://orteil.dashnet.org/cookieclicker/"; // attempts loading cookie clicker to see if lighspeed died
+        	iframe.style.width = "1px";
+        	iframe.style.height = "1px";
+        	iframe.style.position = "absolute";
+        	iframe.style.left = "-9999px"; 
+        	iframe.onload = () => {
+            	    instructions.innerHTML = "Lightspeed Filter Agent has been killed.";
+        	};
+        	document.body.appendChild(iframe);
+
+        	setTimeout(() => {
+            	    document.body.removeChild(iframe);
+        	}, 1000);
+   	    }
+	    setInterval(checkKilled, 1000);
         }
     </script>
 </head>
