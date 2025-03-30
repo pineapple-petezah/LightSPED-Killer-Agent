@@ -1,6 +1,9 @@
 ## LightSPED Killer Agent
 LightSPED is a tool made by [Blobby-Boi](https://github.com/Blobby-Boi) that allows ChromeOS users to easily disable the "Lightspeed Filter Agent" extension. This will persist until you restart your computer or flip the switch again.
 
+## How does this even work?
+This works by exploiting a vulnerability in Lightspeed where if you load any of its pages and then try opening a long URI afterwards (as in, over 1 million charactes) the extension page gets permanently hanged. This is a really neat way of hanging an extension and much more reliable than ExtPrint3r and ExtHang3r, though sadly it works for only Lightspeed. I dont really know the reason why, though someone suggested it could have to do with Lighspeed's processes not being OS-level like in other filters.
+
 ### How to use
 - Step 1. Go to [this link](https://lightsped-killer-agent.github.io) or open the following data URI:
 ```
